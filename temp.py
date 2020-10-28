@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
+# import numpy as np
 
 maze = []
 walls = []
 Start =[]
-end = [47,1]
-
+end = [1,47]
+Dimensions = 51
 with open(r"C:\Users\racha\OneDrive\Desktop\maze.txt", 'r') as f:
     line = f.readlines() #reading the lines in the file
     
@@ -13,7 +14,7 @@ with open(r"C:\Users\racha\OneDrive\Desktop\maze.txt", 'r') as f:
             walls.append(1) 
         elif element == "False\n":
             walls.append(0)
-        if len(walls) == 51:
+        if len(walls) == Dimensions:
             maze.append(walls)
             walls = []
 
@@ -21,11 +22,11 @@ with open(r"C:\Users\racha\OneDrive\Desktop\maze.txt", 'r') as f:
 def Startpoint_input():
     for i in range(0,2):
         Userinput = input("Enter your coordinates: ")
-        if Userinput in str(range(len(maze))):
+        if Userinput in str(list(range(Dimensions))):
             Start.append(int(Userinput))
         else:
-            Start.clear()
             print("Wrong input type.")
+            Start.clear()
             Startpoint_input() #rerun loop function
             break
 Startpoint_input()
@@ -96,13 +97,13 @@ path()
 #add path taken into maze[]
 for a in range(len(path_taken)):
     maze[path_taken[a][1]][path_taken[a][0]]=2
-    
+
 #visualising maze
 plt.pcolormesh(maze)
 plt.axes().set_aspect('equal') #set the x and y axes to the same scale
-plt.xticks([]) # remove the tick marks by setting to an empty list
-plt.yticks([]) # remove the tick marks by setting to an empty list
-
+# plt.xticks([]) # remove the tick marks by setting to an empty list
+# plt.yticks([]) # remove the tick marks by setting to an empty list
+plt.gca().invert_yaxis()
 #plotting points
 endpoint = plt.plot(end[0]+0.5,end[1]+0.5,'ro')
 startpoint = plt.plot(Start[0]+0.5,Start[1]+0.5,'go')
