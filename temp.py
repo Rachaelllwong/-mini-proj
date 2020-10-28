@@ -20,12 +20,12 @@ with open(r"C:\Users\racha\OneDrive\Desktop\maze.txt", 'r') as f:
 #starting point
 def Startpoint_input():
     for i in range(0,2):
-        number = float(input("Enter your coordinates: "))
-        if number<50 and number>0:       
-            Start.append(int(number))
+        Userinput = input("Enter your coordinates: ")
+        if Userinput in str(range(len(maze))):
+            Start.append(int(Userinput))
         else:
-            print ('Out of bounds, please re-enter your coordinates.')
             Start.clear()
+            print("Wrong input type.")
             Startpoint_input() #rerun loop function
             break
 Startpoint_input()
@@ -33,8 +33,8 @@ Startpoint_input()
 #Checking for walls
 def Startpoint_Coords():
     #determining of value of coord
-    List1 = maze[Start[0]]
-    List2 = List1[Start[1]]
+    List1 = maze[Start[1]]
+    List2 = List1[Start[0]]
     if List2 == 1:
         print("Coordinate is a wall, please re-enter your coordinate")
         Start.clear()
