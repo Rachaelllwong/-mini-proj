@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 maze = []
 walls = []
 Start =[]
-end = [1,47]
+end = [47,1]
 Dimensions = 51
 with open(r"C:\Users\racha\OneDrive\Desktop\maze.txt", 'r') as f:
     line = f.readlines() #reading the lines in the file
@@ -41,6 +42,7 @@ def Startpoint_Coords():
         Startpoint_input()
         Startpoint_Coords()
 Startpoint_Coords()
+print('Your Starting Coordinates: ', Start)
 
 #Creating a 0 matrix
 p = []
@@ -97,14 +99,18 @@ path()
 for a in range(len(path_taken)):
     maze[path_taken[a][1]][path_taken[a][0]]=2
 
-#visualising maze
-plt.pcolormesh(maze)
+#visualising maze   
+endpoint = plt.plot(end[1]+0.5,end[0]+0.5,'ro')
+startpoint = plt.plot(Start[0]+0.5,Start[1]+0.5,'go')
+
+Tmaze = np.array(maze)
+Tmaze = np.transpose(Tmaze)
+
+plt.pcolormesh(Tmaze)
 plt.axes().set_aspect('equal') #set the x and y axes to the same scale
 # plt.xticks([]) # remove the tick marks by setting to an empty list
 # plt.yticks([]) # remove the tick marks by setting to an empty list
 plt.gca().invert_yaxis()
 #plotting points
-endpoint = plt.plot(end[0]+0.5,end[1]+0.5,'ro')
-startpoint = plt.plot(Start[0]+0.5,Start[1]+0.5,'go')
 
 plt.show()
